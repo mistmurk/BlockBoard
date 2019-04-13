@@ -79,12 +79,21 @@ export default class WhiteBoard extends Component {
 				EventBus.emit(EventBus.UNDO)
 				break;
 			case 83: //s
-				const options = {encrypt: true};
-				putFile('whiteboard.json', JSON.stringify(this.state.data), options)
+				const w_options = {encrypt: true};
+				putFile('whiteboard.json', JSON.stringify(this.state.data), w_options)
 					.then(() => {
 						console.log("written successfully");
 					})
 					.catch(e => console.error(e.stack));
+        break;
+      case 76: //l
+        const r_options = {decrypt: true};
+        getFile('whiteboard.json', r_options)
+          .then((res) => {
+            var whiteboard = JSON.parse(res || '[]')
+            console.log(whiteboard);
+          })
+          .catch(e => console.log(e.stack))
 		}
 	}
 	onMove(shape){

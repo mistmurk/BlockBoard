@@ -1,5 +1,7 @@
 import React, { Component, Link } from 'react';
-import Profile from './Profile.jsx';
+import Whiteboard from './Whiteboard.jsx';
+import Tools from './tools.jsx';
+import History from './history.jsx';
 import Signin from './Signin.jsx';
 import {
   isSignInPending,
@@ -32,7 +34,18 @@ export default class App extends Component {
         <div className="site-wrapper-inner">
           { !isUserSignedIn() ?
            <Signin handleSignIn={ this.handleSignIn } />
-           : <Profile handleSignOut={ this.handleSignOut } />
+           : <div id='main'>
+             <div id='container'>
+               <Tools/>
+               <Whiteboard/>
+             </div>
+             <button
+              height='20px'
+              onClick= {this.handleSignOut.bind(this)}
+             />
+             <History/>
+
+             </div>
           }
         </div>
       </div>
