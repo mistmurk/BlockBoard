@@ -3,6 +3,14 @@ import EventBus from '../eventBus';
 import Store from '../store';
 import Selection from './selection.jsx'
 import { getShapeRect } from '../utils'
+import {
+  isSignInPending,
+  loadUserData,
+  Person,
+  getFile,
+  putFile,
+  lookupProfile
+} from 'blockstack';
 
 export default class WhiteBoard extends Component {
 	constructor() {
@@ -70,6 +78,13 @@ export default class WhiteBoard extends Component {
 			case 27: //escape
 				EventBus.emit(EventBus.UNDO)
 				break;
+			case 83: //s
+				const options = {encrypt: true};
+				putFile('whiteboard.json', JSON.stringify(this.state.data), options)
+					.then(() => {
+						console.log("written successfully");
+					})
+					.catch(e => console.error(e.stack));
 		}
 	}
 	onMove(shape){
