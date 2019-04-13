@@ -31,8 +31,8 @@ export default class App extends Component {
       <div className="site-wrapper">
         <div className="site-wrapper-inner">
           { !isUserSignedIn() ?
-            <Signin handleSignIn={ this.handleSignIn } />
-            : <Profile handleSignOut={ this.handleSignOut } />
+           <Signin handleSignIn={ this.handleSignIn } />
+           : <Profile handleSignOut={ this.handleSignOut } />
           }
         </div>
       </div>
