@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import EventBus from '../eventBus';
 import ToolStore, { POINTER, PEN, LINE, ELLIPSE, RECT } from '../toolStore';
-import ColorPicker from './colorPicker';
+import ColorPicker from './colorPicker.jsx';
 
 export default class Tools extends Component {
 	constructor() {
