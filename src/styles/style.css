@@ -1,7 +1,12 @@
 /* Globals */
 a,a:focus,a:hover{color:#fff;}
-html,body{height:100%;background-color:#E91E63;}
-body{color:#fff;text-align:center;}
+html,body{
+	height:100%;
+	background-color:#E91E63;}
+body{
+	color:#fff;
+	text-align:center;
+}
 .hide{display:none;}
 .landing-heading{font-family:'Source Code Pro',monospace;font-weight:400;}
 
@@ -26,3 +31,69 @@ body{color:#fff;text-align:center;}
 
 /* Input */
 input, textarea{color:#000;}
+
+/*Tools*/
+#tools{
+	display: block;
+}
+#tools > div{
+	width: 5%;
+	height:5%;
+	font-size: 30;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+
+/*History*/
+#history{
+	display: flex;
+}
+
+#history > span{
+	width: 10px;
+	height: 10px;
+	border: 1px solid;
+	font-size: 30;
+	justify-content: center;
+	display: flex;
+	margin: 2px;
+}
+
+#history > span.selected{
+	background-color: black;
+	color: white;
+}
+
+/*selection*/
+#selection {
+	cursor: all-scroll;
+	fill: aliceblue;
+	fill-opacity: 0.5;
+	stroke: blue;
+	stroke-dasharray: 5 10;
+}
+
+/*main*/
+#main { 
+	display: flex;
+	flex-direction: column;
+	width: 100%; height: 100%; 
+	background-color: #FFF;
+}
+#container{
+	display:flex;
+	flex: 1;
+}
+#whiteBoard{
+	border: 1px;
+	flex: 1;
+}
+
+#root{
+	width: 100%;
+	height: 100%;
+}
