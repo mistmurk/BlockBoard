@@ -37,16 +37,13 @@ input, textarea{color:#000;}
 	display: block;
 }
 #tools > div{
-	width: 5%;
-	height:5%;
 	font-size: 30;
 	justify-content: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: #000;
 }
-
-
 
 /*History*/
 #history{
@@ -97,3 +94,5 @@ input, textarea{color:#000;}
 	width: 100%;
 	height: 100%;
 }
+
+/*tools*/
