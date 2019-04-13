@@ -48,21 +48,21 @@ input, textarea{color:#000;}
 /*History*/
 #history{
 	display: flex;
+	background-color: #ABABAB;
 }
 
 #history > span{
-	width: 10px;
-	height: 10px;
+	width: 18px;
 	border: 1px solid;
 	font-size: 30;
 	justify-content: center;
 	display: flex;
 	margin: 2px;
+	background-color:black;
 }
 
 #history > span.selected{
 	background-color: black;
-	color: white;
 }
 
 /*selection*/
@@ -96,3 +96,6 @@ input, textarea{color:#000;}
 }
 
 /*tools*/
+#tools{
+	background-color: #ABABAB;
+}
