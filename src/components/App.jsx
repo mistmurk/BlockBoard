@@ -39,10 +39,6 @@ export default class App extends Component {
                <Tools/>
                <Whiteboard/>
              </div>
-             <button
-              height='20px'
-              onClick= {this.handleSignOut.bind(this)}
-             />
              <History/>
 
              </div>
