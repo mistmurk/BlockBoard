@@ -19,8 +19,8 @@ export default class Ellipse extends Component {
 		return (<ellipse
 				cx = {ellipse.cx}
 				cy = {ellipse.cy}
-				rx = {ellipse.rx}
-				ry = {ellipse.ry}
+				rx = {Math.abs(ellipse.rx)}
+				ry = {Math.abs(ellipse.ry)}
 				stroke={this.props.color}
 		        strokeWidth={1}
 		        fill="none"

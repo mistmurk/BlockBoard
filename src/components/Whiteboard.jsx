@@ -12,6 +12,9 @@ export default class WhiteBoard extends Component {
 			this.setState({ data: Store.data });
 		});
 		this.state = { data: Store.data };
+		this.scale = 1.1;
+		this.dx = 0;
+		this.dy = 0;
 		this.pressed = false;
 	}
 
