@@ -37,6 +37,8 @@ input, textarea{color:#000;}
 	display: block;
 	background-color: #ABABAB;
 }
+
+/*all divs under tools*/
 #tools > div{
 	font-size: 30;
 	justify-content: center;
@@ -46,32 +48,45 @@ input, textarea{color:#000;}
 	color: #000;
 }
 
+/*everything in tools not a color*/
 #tools > div :not(#colors){
-	margin: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
+/*the selected tool/brush*/
+#tools > .selected {
+	border: 1px solid;
+}
+
+/*the colors*/
+
 div[style*=display]{
-	margin: 2px;
+	justify-content: center;
+	margin: 0px;
+	width: 100%;
 }
 
 #tools > button {
 	width: 80%;
 	display: flex;
-	text-align:center;
+	align-content: center;
 	justify-content: center;
-	margin: 0 auto;
 	color: #000;
+	margin-left: 10%;
 }
 
 /*History*/
 #history{
 	display: flex;
+	color: black;
 	background-color: #ABABAB;
 }
 
 #history > span{
 	width: 18px;
 	border: 1px solid;
+	border-color: black;
 	font-size: 30;
 	justify-content: center;
 	display: flex;

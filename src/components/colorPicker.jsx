@@ -37,13 +37,12 @@ export default class ColorPicker extends Component {
 				backgroundColor: color,
 				width: 20,
 				height: 20,
-				margin: 5
+				margin: 4
 			};
 			let borderStyle = {
 			    display: 'flex',
 			    border: 1,
 				border: this.state.selectedColorIndex === i?'1px solid':'',
-				margin: 1
 			};
 
 			return <div key={i} style={borderStyle}>
