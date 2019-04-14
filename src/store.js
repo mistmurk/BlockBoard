@@ -136,7 +136,9 @@ class Store {
 			}
 		})
 	}
+
 	redo() { }
+	
 	loadJson(js) {
 		this.history = [];
 		this.data = {
@@ -158,7 +160,6 @@ class Store {
 				data.shapes[thing].class = Ellipse;
 			}
 			this.addShapeToCanvas(data.shapes[thing])
-			console.log(data.shapes[thing]);
 		}
 		console.log('Loaded', this.data);
 		this.emitChanges();
