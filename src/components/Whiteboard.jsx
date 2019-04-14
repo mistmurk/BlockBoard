@@ -11,7 +11,7 @@ import {
   lookupProfile
 } from 'blockstack';
 
-export default class WhiteBoard extends Component {
+export default class WhiteBoard extends React.Component {
 	constructor() {
 		super();
 
@@ -24,8 +24,8 @@ export default class WhiteBoard extends Component {
 		this.dy = 0;
 		this.pressed = false;
 
-    EventBus.on(EventBus.SAVE, this.save.bind(this));
-    EventBus.on(EventBus.LOAD, this.load.bind(this));
+		EventBus.on(EventBus.SAVE, this.save.bind(this));
+		EventBus.on(EventBus.LOAD, this.load.bind(this));
 	}
 
 	componentDidMount() {
@@ -39,29 +39,29 @@ export default class WhiteBoard extends Component {
 		this.setState({ data: Store.data });
 	};
 
-  save() {
-    let stringified = JSON.stringify(this.state.data, (name, val) => {
-      if(typeof val === 'function') {
-        return val.toString().substring(9, val.toString().indexOf('('));
-      }
-      return val;
-    });
-    const w_options = {encrypt: true};
-    putFile('whiteboard.json', stringified, w_options)
-      .then(() => {
-        console.log("written successfully");
-      })
-      .catch(e => console.error(e.stack));
-  }
+	save() {
+		let stringified = JSON.stringify(this.state.data, (name, val) => {
+			if(typeof val === 'function') {
+				return val.toString().substring(9, val.toString().indexOf('('));
+			}
+			return val;
+		});
+		const w_options = {encrypt: true};
+		putFile('whiteboard.json', stringified, w_options)
+			.then(() => {
+				console.log("written successfully");
+			})
+			.catch(e => console.error(e.stack));
+	}
 
-  load() {
-    const r_options = {decrypt: true};
-    getFile('whiteboard.json', r_options)
-      .then((res) => {
-        Store.loadJson(res);
-      })
-      .catch(e => console.log(e.stack));
-  }
+	load() {
+		const r_options = {decrypt: true};
+		getFile('whiteboard.json', r_options)
+			.then((res) => {
+				Store.loadJson(res);
+			})
+			.catch(e => console.log(e.stack));
+	}
 
 
 	onResize() {
@@ -106,11 +106,11 @@ export default class WhiteBoard extends Component {
 				EventBus.emit(EventBus.UNDO)
 				break;
 			case 83: //s
-        this.save();
-        break;
-      case 76: //l
-        this.load();
-        break;
+				this.save();
+				break;
+			case 76: //l
+				this.load();
+				break;
 		}
 	}
 	onMove(shape){
@@ -124,6 +124,7 @@ export default class WhiteBoard extends Component {
 		const data = this.state.data
 		let selection = null
 		const shapes = data.shapes.map((shape, i) => {
+			console.log(shapes);
 			if (shape.selected) {
 				selection = <Selection rect={getShapeRect(shape)} move={this.onMove(shape)}/>
 			}
