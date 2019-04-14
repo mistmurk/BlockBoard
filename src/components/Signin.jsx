@@ -10,8 +10,10 @@ export default class Signin extends Component {
     const { handleSignIn } = this.props;
 
     return (
-      <div className="panel-landing" id="section-1">
-        <h1 className="landing-heading">Hello, Blockstack!</h1>
+      <div>
+        <img src = "src/images/icon-192x192.png" width = '10%'/>
+        <h1 className="landing-heading">Welcome to BlockBoard</h1>
+        <h2 className="landing-heading">We've Got the Best Boards on the Block</h2>
         <p className="lead">
           <button
             className="btn btn-primary btn-lg"
