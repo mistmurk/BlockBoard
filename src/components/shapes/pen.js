@@ -15,12 +15,12 @@ export default class Pen extends Component {
 
 	    return d.concat(collector).join(' ');
 	}
-
+	
 	render(){
 		let d = this.prepareData();
 		return (<path d={d}
 		        stroke={this.props.color}
-		        strokeWidth={1}
+		        strokeWidth={3}
 		        fill="none"
 		      />);
 	}

@@ -12,12 +12,12 @@ export default class Line extends Component {
 
 		return d.join(' ');
 	}
-
+	
 	render() {
 		let d = this.prepareData();
 		return (<path d={d}
 			stroke={this.props.color}
-			strokeWidth={1}
+			strokeWidth={3}
 			fill="none"
 		/>);
 	}

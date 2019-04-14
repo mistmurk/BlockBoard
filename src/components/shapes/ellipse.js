@@ -22,7 +22,7 @@ export default class Ellipse extends Component {
 				rx = {Math.abs(ellipse.rx)}
 				ry = {Math.abs(ellipse.ry)}
 				stroke={this.props.color}
-		        strokeWidth={1}
+		        strokeWidth={3}
 		        fill="none"
 		      />);
 	}
