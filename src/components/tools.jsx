@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import EventBus from '../eventBus';
 import ToolStore, { POINTER, PEN, LINE, ELLIPSE, RECT } from '../toolStore';
 import ColorPicker from './colorPicker.jsx';
-import {signUserOut,
-	redirectToSignIn} from 'blockstack';
+import {
+	signUserOut,
+	redirectToSignIn
+} from 'blockstack';
 import Whiteboard from './Whiteboard.jsx'
 
 export default class Tools extends Component {
@@ -35,26 +37,38 @@ export default class Tools extends Component {
 	}
 	//loads images from file
 	load(e){
-		e.preventDefault();
 		const r_options = {decrypt: true};
 		getFile('whiteboard.json', r_options)
 			.then((res) => {
-				var whiteboard = JSON.parse(res || '[]')
-				console.log(whiteboard);
+				Store.loadJson(res);
 			})
 			.catch(e => console.log(e.stack))
 
 	}
 	//this saves the image currently on the whiteboard
 	save(e){
-		e.preventDefault();
+		let stringified = JSON.stringify(this.state.data, (name, val) => {
+			if(typeof val === 'function') {
+				return val.toString().substring(9, val.toString().indexOf('('));
+			}
+			return val;
+		});
+		console.log(stringified);
 		const w_options = {encrypt: true};
-		putFile('whiteboard.json', JSON.stringify(this.state.data), w_options)
+		putFile('whiteboard.json', stringified, w_options)
 			.then(() => {
 				console.log("written successfully");
 			})
 			.catch(e => console.error(e.stack));
 
+	}
+
+	save() {
+		EventBus.emit(EventBus.SAVE);
+	}
+
+	load() {
+		EventBus.emit(EventBus.LOAD);
 	}
 
 	render() {
@@ -64,17 +78,19 @@ export default class Tools extends Component {
 			className={tool.selected ? 'selected' : ''}
 		><i className={tool.label + ' fa'}></i></div>)
 		return (<div id="tools">
-			{tools}
-			<ColorPicker />
-			<button onClick = {this.save.bind(this)}>
-				save
-			</button>
-			<button onClick = {this.load.bind(this)}>
-				load
-			</button>
-			<button onClick = {this.handleSignOut.bind(this)}>
-				exit
-			</button>
-		</div>);
+				{tools}
+				<ColorPicker />
+				<button onClick = {this.handleSignOut.bind(this)}>
+					Exit
+				</button>
+				<button onClick = {this.save.bind(this)}
+								id="signin-button">
+					Save
+				</button>
+				<button onClick = {this.load.bind(this)}
+								id="signin-button">
+					Load
+				</button>
+			</div>);
 	}
 }

@@ -6,7 +6,6 @@ import { getShapeRect } from '../utils'
 import {
   isSignInPending,
   loadUserData,
-  Person,
   getFile,
   putFile,
   lookupProfile
@@ -24,6 +23,9 @@ export default class WhiteBoard extends Component {
 		this.dx = 0;
 		this.dy = 0;
 		this.pressed = false;
+
+    EventBus.on(EventBus.SAVE, this.save.bind(this));
+    EventBus.on(EventBus.LOAD, this.load.bind(this));
 	}
 
 	componentDidMount() {
@@ -36,6 +38,31 @@ export default class WhiteBoard extends Component {
 		this.onResize();
 		this.setState({ data: Store.data });
 	};
+
+  save() {
+    let stringified = JSON.stringify(this.state.data, (name, val) => {
+      if(typeof val === 'function') {
+        return val.toString().substring(9, val.toString().indexOf('('));
+      }
+      return val;
+    });
+    const w_options = {encrypt: true};
+    putFile('whiteboard.json', stringified, w_options)
+      .then(() => {
+        console.log("written successfully");
+      })
+      .catch(e => console.error(e.stack));
+  }
+
+  load() {
+    const r_options = {decrypt: true};
+    getFile('whiteboard.json', r_options)
+      .then((res) => {
+        Store.loadJson(res);
+      })
+      .catch(e => console.log(e.stack));
+  }
+
 
 	onResize() {
 		this.rect = this._svg.getBoundingClientRect();
@@ -79,27 +106,11 @@ export default class WhiteBoard extends Component {
 				EventBus.emit(EventBus.UNDO)
 				break;
 			case 83: //s
-        let stringified = JSON.stringify(this.state.data, (name, val) => {
-          if(typeof val === 'function') {
-            return val.toString().substring(9, val.toString().indexOf('('));
-          }
-          return val;
-        });
-        console.log(stringified);
-				const w_options = {encrypt: true};
-				putFile('whiteboard.json', stringified, w_options)
-					.then(() => {
-						console.log("written successfully");
-					})
-					.catch(e => console.error(e.stack));
+        this.save();
         break;
       case 76: //l
-        const r_options = {decrypt: true};
-        getFile('whiteboard.json', r_options)
-          .then((res) => {
-            Store.loadJson(res);
-          })
-          .catch(e => console.log(e.stack))
+        this.load();
+        break;
 		}
 	}
 	onMove(shape){

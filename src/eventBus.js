@@ -10,7 +10,9 @@ class EventBus{
 			TOOL_CHANGE: 'toolChange',
 			COLOR_CHANGE: 'cororChange',
 			PICK_VERSION: 'pickVersion',
-			MOVE: 'move'
+			MOVE: 'move',
+			SAVE: 'save',
+			LOAD: 'load',
 		};
 		Object.assign(this, events);
 		this.listeners = {};
