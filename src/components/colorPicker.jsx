@@ -14,7 +14,8 @@ export default class ColorPicker extends Component {
 				'blue',
 				'indigo',
 				'violet',
-				'black'
+				'black',
+				'white',
 			],
 			selectedColorIndex:7
 		};
