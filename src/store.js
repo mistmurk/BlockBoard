@@ -33,7 +33,7 @@ class Store {
 			selected: [],
 			mouseTracker: null
 		};
-		this.history = [];
+		this.history = [[]];
 		this.tool = Pen;
 		this.color = 'black';
 
@@ -43,6 +43,7 @@ class Store {
 			this.tool = mapTools[tool] || null
 			this.color = ToolStore.color
 		})
+
 	}
 	subscribe(cb) {
 		EventBus.on(this.id, cb);
@@ -97,7 +98,6 @@ class Store {
 	}
 	addVersion(){
 		this.history.push(this.data.shapes.slice());
-		console.log(this.history);
 	}
 
 	undo() {
@@ -107,13 +107,11 @@ class Store {
 	pickVersion(event, index) {
 		if (this.history && index >= 0) {
 			let shapes = this.history[index];
-			console.log(shapes);
-			console.log(this.history);
 			this.data.shapes = shapes;
 			this.history.length = index+1;
 			this.emitChanges();
 		} else {
-			this.history = [];
+			this.history = [[]];
 			this.data.shapes = [];
 			this.emitChanges();
 		}

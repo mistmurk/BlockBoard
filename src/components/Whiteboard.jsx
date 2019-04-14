@@ -124,7 +124,6 @@ export default class WhiteBoard extends React.Component {
 		const data = this.state.data
 		let selection = null
 		const shapes = data.shapes.map((shape, i) => {
-			console.log(shapes);
 			if (shape.selected) {
 				selection = <Selection rect={getShapeRect(shape)} move={this.onMove(shape)}/>
 			}
