@@ -36,6 +36,7 @@ input, textarea{color:#000;}
 #tools{
 	display: block;
 	background-color: #ABABAB;
+	padding-top: 5px;
 }
 
 /*all divs under tools*/
