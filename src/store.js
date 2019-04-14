@@ -33,9 +33,8 @@ class Store {
 			selected: [],
 			mouseTracker: null
 		};
-		this.history = [this.data.shapes];
-		this.historyIndex = -1;
-		this.tool = Line;
+		this.history = [];
+		this.tool = Pen;
 		this.color = 'black';
 
 		ToolStore.subscribe(() => {
@@ -97,28 +96,25 @@ class Store {
 		})
 	}
 	addVersion(){
-		this._catHistory();
-		this.history.push(this.data.shapes);
-		this.historyIndex = -1;
+		this.history.push(this.data.shapes.slice());
+		console.log(this.history);
 	}
 
 	undo() {
-		if (this.history.length > 0) {
-			if (this.historyIndex == -1) this.historyIndex = this.history.length - 1;
-			this.pickVersion(null, this.historyIndex - 1);
-		}
+		this.pickVersion(null, this.history.length-2);
 	}
-	_catHistory() {
-		if (this.historyIndex >= 0) {
-			this.history.splice(this.historyIndex + 1, this.history.length - this.historyIndex - 1);
-		}
-	}
+
 	pickVersion(event, index) {
-		console.log(index)
-		if (this.history && this.history[index]) {
-			this.historyIndex = index;
+		if (this.history && index >= 0) {
 			let shapes = this.history[index];
+			console.log(shapes);
+			console.log(this.history);
 			this.data.shapes = shapes;
+			this.history.length = index+1;
+			this.emitChanges();
+		} else {
+			this.history = [];
+			this.data.shapes = [];
 			this.emitChanges();
 		}
 	}
@@ -138,7 +134,7 @@ class Store {
 	}
 
 	redo() { }
-	
+
 	loadJson(js) {
 		this.history = [];
 		this.data = {

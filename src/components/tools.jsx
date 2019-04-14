@@ -14,10 +14,10 @@ export default class Tools extends Component {
 		this.state = {
 			tools: [
 				{ id: POINTER, label: 'fa-mouse-pointer', type: 'cursor' },
-				{ id: LINE, label: 'fa-slash', type: 'line', selected: true },
+				{ id: LINE, label: 'fa-slash', type: 'line' },
 				{ id: RECT, label: 'fa-square', type: 'rect' },
 				{ id: ELLIPSE, label: 'fa-circle-notch', type: 'ellipse' },
-				{ id: PEN, label: 'fa-marker', type: 'pen' },
+				{ id: PEN, label: 'fa-marker', type: 'pen', selected: true },
 			]
 		};
 		ToolStore.subscribe(() => {
