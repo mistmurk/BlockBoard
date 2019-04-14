@@ -13,7 +13,7 @@ export default class Rect extends Component {
 		};
 	    return rect;
 	}
-
+	
 	render(){
 		let rect = this.prepareData();
 		return (<rect
@@ -22,7 +22,7 @@ export default class Rect extends Component {
 				width = {rect.width}
 				height = {rect.height}
 				stroke={this.props.color}
-		        strokeWidth={1}
+		        strokeWidth={3}
 		        fill="none"
 		      />);
 	}

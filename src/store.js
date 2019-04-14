@@ -1,4 +1,3 @@
-import Immutable from 'immutable';
 import EventBus from './eventBus'
 import ToolStore, { POINTER, PEN, LINE, ELLIPSE, RECT } from './toolStore';
 import Line from './components/shapes/line';
@@ -30,7 +29,7 @@ class Store {
 		EventBus.on(EventBus.MOVE, this.move.bind(this))
 
 		this.data = {
-			shapes: Immutable.List.of(),
+			shapes: [],
 			selected: [],
 			mouseTracker: null
 		};
@@ -84,12 +83,12 @@ class Store {
 		}
 	}
 	addShapeToCanvas(shape) {
-		this.data.shapes = this.data.shapes.push(shape)
+		this.data.shapes.push(shape)
 		this.data.mouseTracker = null
 		this.addVersion()
 	}
 	selectShape(position) {
-		this.data.shapes = this.data.shapes.map(shape => {
+		this.data.shapes.map(shape => {
 			if (pointInsideRect(position, getShapeRect(shape))) {
 				return { ...shape, selected: true }
 			} else {
@@ -124,7 +123,7 @@ class Store {
 		}
 	}
 	move(event, { shape, move }) {
-		this.data.shapes = this.data.shapes.map(s => {
+		this.data.shapes.map(s => {
 			if (shape === s) {
 				return {
 					...s, path: s.path.map(({ x, y }) => ({
@@ -138,6 +137,32 @@ class Store {
 		})
 	}
 	redo() { }
+	loadJson(js) {
+		this.history = [];
+		this.data = {
+			shapes: [],
+			selected: [],
+			mouseTracker: null
+		};
+
+		let data = JSON.parse(js);
+		for(var thing in data.shapes) {
+			const type = data.shapes[thing].class;
+			if(type === 'Line') {
+				data.shapes[thing].class = Line;
+			} else if (type === 'Pen') {
+				data.shapes[thing].class = Pen;
+			} else if (type === 'Rect') {
+				data.shapes[thing].class = Rect;
+			} else if (type === 'Ellipse') {
+				data.shapes[thing].class = Ellipse;
+			}
+			this.addShapeToCanvas(data.shapes[thing])
+			console.log(data.shapes[thing]);
+		}
+		console.log('Loaded', this.data);
+		this.emitChanges();
+	}
 }
 
 export default new Store();

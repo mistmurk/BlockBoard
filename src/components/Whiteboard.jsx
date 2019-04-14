@@ -79,8 +79,15 @@ export default class WhiteBoard extends Component {
 				EventBus.emit(EventBus.UNDO)
 				break;
 			case 83: //s
+        let stringified = JSON.stringify(this.state.data, (name, val) => {
+          if(typeof val === 'function') {
+            return val.toString().substring(9, val.toString().indexOf('('));
+          }
+          return val;
+        });
+        console.log(stringified);
 				const w_options = {encrypt: true};
-				putFile('whiteboard.json', JSON.stringify(this.state.data), w_options)
+				putFile('whiteboard.json', stringified, w_options)
 					.then(() => {
 						console.log("written successfully");
 					})
@@ -90,8 +97,7 @@ export default class WhiteBoard extends Component {
         const r_options = {decrypt: true};
         getFile('whiteboard.json', r_options)
           .then((res) => {
-            var whiteboard = JSON.parse(res || '[]')
-            console.log(whiteboard);
+            Store.loadJson(res);
           })
           .catch(e => console.log(e.stack))
 		}
