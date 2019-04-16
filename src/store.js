@@ -112,8 +112,6 @@ class Store {
 		if (this.history && this.history.length > 1) {
 			let shapes = this.history.pop();
 			this.data.shapes = shapes;
-			console.log("HISTORY")
-			console.log(shapes);
 			this.emitChanges();
 		} else {
 			this.history = [[]];
