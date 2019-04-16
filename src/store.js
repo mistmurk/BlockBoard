@@ -97,18 +97,23 @@ class Store {
 		})
 	}
 	addVersion(){
-		this.history.push(this.data.shapes.slice());
+		if(this.history.length == this.data.shapes.slice(0).length){
+			this.history.push(this.data.shapes.slice(0,-1));
+		} else {
+		this.history.push(this.data.shapes.slice(0));
+		}
 	}
 
 	undo() {
-		this.pickVersion(null, this.history.length-2);
+		this.pickVersion(null);
 	}
 
-	pickVersion(event, index) {
-		if (this.history && index >= 0) {
-			let shapes = this.history[index];
+	pickVersion(event) {
+		if (this.history && this.history.length > 1) {
+			let shapes = this.history.pop();
 			this.data.shapes = shapes;
-			this.history.length = index+1;
+			console.log("HISTORY")
+			console.log(shapes);
 			this.emitChanges();
 		} else {
 			this.history = [[]];
